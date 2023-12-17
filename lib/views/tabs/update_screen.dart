@@ -85,13 +85,24 @@ class _UpdateScreenState extends State<UpdateScreen> {
                     ),
                   if (updatesController.file != null)
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (selectedFile == null || selectedFile!.isEmpty) {
                           Get.snackbar('Error', 'Select file type');
                         } else if (textController.text.isEmpty) {
                           Get.snackbar('Error', 'Enter description');
                         } else {
-                          // updatesController.uploadImage(textController.text);
+                          showDialog(context: context,
+                              barrierDismissible: false,
+                              builder: (context){
+                            return const Center(child: CircularProgressIndicator(),);
+                          });
+                          await updatesController.pushUpdate(textController.text,
+                              selectedFile!.toLowerCase());
+                          textController.clear();
+                          updatesController.clearFile();
+                          selectedFile = null;
+                          setState(() {});
+                          Navigator.pop(context);
                         }
                       },
                       child: Text('Publish'),

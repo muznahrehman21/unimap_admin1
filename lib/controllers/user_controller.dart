@@ -34,7 +34,7 @@ class UserController extends GetxController {
       firebaseUser.value = userCredential!.user;
 
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => BottomNav()));
+          context, MaterialPageRoute(builder: (context) => const BottomNav()));
     }
     catch(e){
       Get.snackbar('Error',e.toString() );

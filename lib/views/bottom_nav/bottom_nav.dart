@@ -17,7 +17,7 @@ class _BottomNavState extends State<BottomNav> {
         appBar: AppBar(
           backgroundColor: Colors.deepPurple,
           foregroundColor: Colors.white,
-          title: const Text('Uni Map'),
+          title: const Text('Uni Map Admin'),
           // actions: [
           //   IconButton(
           //     onPressed: (){ Navigator.push(
