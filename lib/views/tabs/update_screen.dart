@@ -10,7 +10,7 @@ class UpdateScreen extends StatefulWidget {
 class _UpdateScreenState extends State<UpdateScreen> {
   TextEditingController textController = TextEditingController();
   String? selectedFile;
-  List<String> files = ['File 1', 'File 2', 'File 3'];
+  List<String> files = ['Image', 'File',];
 
   @override
   Widget build(BuildContext context) {

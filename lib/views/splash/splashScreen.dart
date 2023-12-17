@@ -16,7 +16,6 @@ class _SplashScreenState extends State<SplashScreen> {
   goNext(){
     Future.delayed(const Duration(seconds: 3), () async{
       if (FirebaseAuth.instance.currentUser != null) {
-
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BottomNav()),);
       } else {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()),);
@@ -25,9 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 3),(){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-    });
+    goNext();
     super.initState();
   }
   @override
