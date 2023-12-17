@@ -52,27 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: ()async {
-                        if (userController.checkCredentials(
-                            emailController.text, passwordController.text)) {
-                          // Navigate to BottomNav if credentials are correct
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) => BottomNav()));
-                        } else {
-
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text('Error'),
-                              content: Text('Incorrect email or password'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
+                        await userController.signInWithEmail(emailController.text, passwordController.text, context);
                       },
                       child: const Text('Login'),
                     ),
