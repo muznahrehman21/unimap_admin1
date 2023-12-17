@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:unimap_admin/widgets/custom_password_textfield.dart';
 import 'package:unimap_admin/widgets/custom_textfield.dart';
-
 import '../bottom_nav/bottom_nav.dart';
-
+import'package:unimap_admin/controllers/user_controller.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -16,6 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  final UserController userController = UserController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +52,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: ()async {
-                        // if(emailController.text.isEmpty || passwordController.text.isEmpty){
-                        //   const Text( 'Please fill all the fields');
-                        //   return;
-                        // }
+                        if (userController.checkCredentials(
+                            emailController.text, passwordController.text)) {
+                          // Navigate to BottomNav if credentials are correct
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => BottomNav()));
+                        } else {
 
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomNav()));
-
-
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('Error'),
+                              content: Text('Incorrect email or password'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
                       },
                       child: const Text('Login'),
                     ),
