@@ -24,6 +24,10 @@ class UserController extends GetxController {
       Get.snackbar('Error', 'Please fill all fields');
       return;
     }
+    if(email != ('admin@unimapnav.com')){
+      Get.snackbar('Error', 'Only admin can login');
+      return;
+    }
     try {
       userCredential =
       await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -33,7 +37,6 @@ class UserController extends GetxController {
           context, MaterialPageRoute(builder: (context) => BottomNav()));
     }
     catch(e){
-      print(e);
       Get.snackbar('Error',e.toString() );
     }
   }
