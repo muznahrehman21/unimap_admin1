@@ -22,7 +22,7 @@ List<Widget> screens=[
   const DashBoard(),
   const UpdateScreen(),
 
-  const ProfileScreen(),
+//  const ProfileScreen(),
 ];
 }
 

@@ -14,9 +14,12 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         appBar: AppBar(
+
+
           backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
+
           title: const Text('Uni Map Admin'),
           // actions: [
           //   IconButton(
