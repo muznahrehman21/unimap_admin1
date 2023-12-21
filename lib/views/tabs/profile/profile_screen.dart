@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:unimap_admin/controllers/user_controller.dart';
 
+import 'add_location.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -12,6 +14,16 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late UserController _userController;
+  @override
+  void initState() {
+   try{
+     _userController = Get.find<UserController>();}
+    catch(e){
+     _userController = Get.put(UserController());
+   }
+    super.initState();
+  }
   File? _profileImage;
 
   Future<void> pickImage() async {
@@ -32,6 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            const SizedBox(height: 20),
             Stack(
               children: [
                 CircleAvatar(
@@ -40,14 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //     : const AssetImage('assets/images/profile.png'),
                   backgroundColor: Colors.grey[300],
                   radius: 50,
-                  child: _profileImage == null
-                      ? IconButton(
-                    icon: const Icon(Icons.add_a_photo),
-                    color: Colors.white,
-                    onPressed: pickImage,
-                    iconSize: 30.0,
-                  )
-                      : null,
+                  child: const Icon(Icons.person, size: 50, color: Colors.deepPurple),
                 ),
               ],
             ),
@@ -61,7 +67,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 5),
             ListTile(
-              leading: const Icon(Icons.logout_outlined),
+              leading: const Icon(Icons.location_on_outlined, color: Colors.deepPurple),
+              title: const Text('Add Location'),
+              trailing: const Icon(Icons.arrow_forward_ios,),
+              onTap: () {
+
+                 Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddLocationScreen(),
+                  ),);
+              },
+            ),
+            const SizedBox(height: 5),
+            ListTile(
+              leading: const Icon(Icons.logout_outlined, color: Colors.deepPurple),
               title: const Text('Logout'),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {
@@ -81,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         TextButton(
                           child: const Text('Yes'),
                           onPressed: () {
-                            // _userController.signOut(context);
+                            _userController.signOut(context);
                           },
                         ),
                       ],

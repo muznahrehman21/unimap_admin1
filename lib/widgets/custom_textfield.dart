@@ -22,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   final bool isValidator;
   final String? validatorMessage;
   final Color? fillColor;
+  final Color? borderColor;
   final TextCapitalization capitalization;
   final Icon? prefixIcon;
   final String? initialValue;
@@ -48,7 +49,7 @@ class CustomTextField extends StatelessWidget {
         this.isEnabled = true,
         this.maxLength,
         this.onChanged,
-        this.onEditingComplete, required Color borderColor
+        this.onEditingComplete,   this.borderColor
       });
 
   @override

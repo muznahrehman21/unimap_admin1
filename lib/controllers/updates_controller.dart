@@ -36,10 +36,8 @@ class UpdatesController extends GetxController {
           await FirebaseStorage.instance.ref(filePath).putFile(file!);
       String imageUrl = await uploadTask.ref.getDownloadURL();
 
-      final userRef = FirebaseFirestore.instance
-          .collection('posts')
-          .doc(FirebaseAuth.instance.currentUser!.uid);
-      await userRef.set({
+      final collection = FirebaseFirestore.instance.collection('posts');
+      await collection.add({
         'url': imageUrl,
         'description': description,
         'type': type,
